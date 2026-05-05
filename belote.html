@@ -4,181 +4,229 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Belote">
-<meta name="theme-color" content="#F8F7F4">
+<meta name="theme-color" content="#0F0E0D">
 <title>Belote de Comptoir</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-:root {
-  --bg: #F8F7F4; --surface: #FFFFFF; --surface-alt: #F2F0EC;
-  --border: #E8E5DF; --border-strong: #D4D0C8;
-  --text: #1A1917; --text-2: #6B6860; --text-3: #9C9990;
-  --green: #1D9E75; --green-light: #E1F5EE; --green-text: #0F6E56;
-  --red: #D85A30; --red-light: #FAECE7; --red-text: #993C1D;
-  --blue: #2563EB; --blue-light: #EFF6FF; --blue-text: #1D4ED8;
-  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-full:999px;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#F5F4F0;--surface:#FFFFFF;--surface2:#EEECEA;--surface3:#E5E3DE;
+  --ink:#0F0E0D;--ink2:#6B6760;--ink3:#A8A5A0;--border:#E0DDD8;
+  --green:#00A876;--green-bg:#E6F7F2;--green-ink:#006647;
+  --red:#E04E2A;--red-bg:#FCEEE9;--red-ink:#8C2A12;
+  --gold:#B8860B;--gold-bg:#FDF8E6;
+  --r:14px;--r-sm:8px;--r-lg:20px;--r-full:999px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);
 }
-html,body { height:100%; background:var(--bg); font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif; color:var(--text); overflow:hidden; }
-.screen { display:none; flex-direction:column; height:100vh; height:100dvh; }
-.screen.active { display:flex; }
+html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased}
+.screen{display:none;flex-direction:column;height:100vh;height:100dvh}
+.screen.active{display:flex}
 
-#setup { overflow-y:auto; padding:20px 16px 40px; }
-.setup-title { font-size:26px; font-weight:600; letter-spacing:-0.5px; margin-bottom:2px; }
-.setup-sub { font-size:14px; color:var(--text-2); margin-bottom:28px; }
-.section-label { font-size:11px; font-weight:600; letter-spacing:0.8px; text-transform:uppercase; color:var(--text-3); margin-bottom:8px; }
-.card { background:var(--surface); border:0.5px solid var(--border); border-radius:var(--r-lg); overflow:hidden; margin-bottom:20px; }
-.field-row { display:flex; align-items:center; padding:12px 16px; border-bottom:0.5px solid var(--border); gap:12px; }
-.field-row:last-child { border-bottom:none; }
-.avatar { width:34px; height:34px; border-radius:var(--r-full); background:var(--surface-alt); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; color:var(--text-2); flex-shrink:0; }
-.field-row input[type=text] { flex:1; border:none; outline:none; font-size:15px; color:var(--text); background:transparent; font-family:inherit; }
-.field-row input[type=text]::placeholder { color:var(--text-3); }
-.rm-btn { width:26px; height:26px; border-radius:var(--r-full); border:0.5px solid var(--border); background:transparent; color:var(--text-3); font-size:18px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-.add-link { display:block; text-align:center; padding:12px; font-size:13px; color:var(--text-2); cursor:pointer; }
-.two-col { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:14px 16px; }
-.mini-field label { font-size:12px; color:var(--text-3); display:block; margin-bottom:4px; }
-.mini-field input { width:100%; border:0.5px solid var(--border); border-radius:var(--r-sm); padding:8px 10px; font-size:15px; color:var(--text); background:transparent; font-family:inherit; outline:none; text-align:center; }
-.seuil-row { display:flex; align-items:center; gap:8px; padding:10px 16px; border-bottom:0.5px solid var(--border); }
-.seuil-row:last-child { border-bottom:none; }
-.seuil-row span { font-size:13px; color:var(--text-2); white-space:nowrap; }
-.seuil-row input { width:52px; border:0.5px solid var(--border); border-radius:var(--r-sm); padding:5px 6px; font-size:14px; text-align:center; font-family:inherit; color:var(--text); background:transparent; outline:none; }
-.btn-primary { width:100%; background:var(--text); color:#fff; border:none; border-radius:var(--r-lg); padding:16px; font-size:16px; font-weight:500; cursor:pointer; font-family:inherit; }
-.btn-primary:active { opacity:0.85; }
+/* ── SETUP ── */
+#setup{overflow-y:auto;background:var(--bg)}
+.setup-hero{padding:48px 20px 24px;background:var(--ink)}
+.setup-hero h1{font-size:28px;font-weight:600;color:#fff;letter-spacing:-0.6px;margin-bottom:4px}
+.setup-hero p{font-size:14px;color:rgba(255,255,255,.4)}
+.setup-body{padding:20px}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;margin-top:24px}
+.sec-label:first-child{margin-top:0}
+.card{background:var(--surface);border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow)}
+.field-row{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);gap:12px}
+.field-row:last-child{border-bottom:none}
+.av{width:34px;height:34px;border-radius:var(--r-full);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+.field-row input[type=text]{flex:1;border:none;outline:none;font-size:15px;color:var(--ink);background:transparent;font-family:inherit;font-weight:500}
+.field-row input[type=text]::placeholder{color:var(--ink3);font-weight:400}
+.rm-btn{width:26px;height:26px;border-radius:var(--r-full);border:1px solid var(--border);background:transparent;color:var(--ink3);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.add-row{display:flex;align-items:center;justify-content:center;padding:13px;cursor:pointer}
+.add-row span{font-size:13px;color:var(--ink2);font-weight:500}
+.two-col{display:grid;grid-template-columns:1fr 1fr;padding:16px;gap:12px}
+.mini-lbl{font-size:12px;color:var(--ink3);margin-bottom:6px;font-weight:500}
+.mini-input{width:100%;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px;font-size:16px;color:var(--ink);font-family:inherit;font-weight:600;outline:none;text-align:center;background:var(--surface2)}
+.seuil-row{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.seuil-row:last-child{border-bottom:none}
+.seuil-row span{font-size:13px;color:var(--ink2);white-space:nowrap}
+.seuil-inp{width:50px;border:1px solid var(--border);border-radius:var(--r-sm);padding:6px;font-size:14px;text-align:center;font-family:inherit;font-weight:600;color:var(--ink);background:var(--surface2);outline:none}
+.start-btn{width:100%;background:var(--ink);color:#fff;border:none;border-radius:var(--r-lg);padding:17px;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:24px}
+.start-btn:active{opacity:.85}
 
-#game { background:var(--bg); }
-.game-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px 10px; border-bottom:0.5px solid var(--border); background:var(--surface); }
-.game-title { font-size:16px; font-weight:600; }
-.new-btn { font-size:13px; color:var(--text-2); border:0.5px solid var(--border-strong); border-radius:var(--r-full); padding:5px 12px; cursor:pointer; background:transparent; font-family:inherit; }
-.tab-bar { display:flex; gap:4px; padding:10px 16px; background:var(--surface); border-bottom:0.5px solid var(--border); }
-.tab { flex:1; padding:7px; text-align:center; font-size:13px; font-weight:500; border-radius:var(--r-md); cursor:pointer; color:var(--text-3); border:none; background:transparent; font-family:inherit; }
-.tab.active { background:var(--text); color:#fff; }
-.tab-content { flex:1; overflow-y:auto; }
-.tab-panel { display:none; padding:16px; }
-.tab-panel.active { display:block; }
+/* past games */
+.wins-row{display:flex;gap:8px;flex-wrap:wrap;padding:14px 16px}
+.win-chip{display:flex;align-items:center;gap:7px;background:var(--surface2);border-radius:var(--r-full);padding:6px 12px 6px 8px}
+.win-av{width:22px;height:22px;border-radius:var(--r-full);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.win-name{font-size:13px;font-weight:500;color:var(--ink)}
+.win-count{font-size:13px;font-weight:700;color:var(--ink)}
+.hist-entry{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--border);gap:12px}
+.hist-entry:last-child{border-bottom:none}
+.hist-info{flex:1}
+.hist-names{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.hist-date{font-size:12px;color:var(--ink3)}
+.hist-winner{background:var(--gold-bg);color:var(--gold);padding:4px 10px;border-radius:var(--r-full);font-size:12px;font-weight:600;white-space:nowrap}
 
-.info-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
-.badge { display:inline-block; padding:4px 10px; border-radius:var(--r-full); font-size:11px; font-weight:600; }
-.badge-neutral { background:var(--surface-alt); color:var(--text-2); }
-.badge-blue { background:var(--blue-light); color:var(--blue-text); }
-.player-card { background:var(--surface); border:0.5px solid var(--border); border-radius:var(--r-lg); padding:16px; margin-bottom:12px; }
-.player-card.leading { border-color:var(--text); border-width:1px; }
-.pc-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
-.pc-left { display:flex; align-items:center; gap:10px; }
-.pc-avatar { width:36px; height:36px; border-radius:var(--r-full); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:600; }
-.pc-name { font-size:15px; font-weight:500; }
-.dist-tag { background:var(--surface-alt); border-radius:var(--r-full); padding:2px 7px; font-size:11px; color:var(--text-3); }
-.pc-score { font-size:30px; font-weight:600; letter-spacing:-0.5px; }
-.score-pos { color:var(--green-text); }
-.score-neg { color:var(--red-text); }
-.track { height:6px; background:var(--surface-alt); border-radius:3px; overflow:hidden; margin-bottom:4px; }
-.track-fill { height:100%; border-radius:3px; }
-.track-labels { display:flex; justify-content:space-between; }
-.track-label { font-size:10px; color:var(--text-3); }
+/* ── GAME ── */
+#game{background:var(--bg)}
+.g-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--ink)}
+.g-title{font-size:16px;font-weight:600;color:#fff}
+.g-new{font-size:13px;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);border-radius:var(--r-full);padding:5px 13px;cursor:pointer;background:transparent;font-family:inherit}
+.tab-bar{display:flex;padding:10px 20px;gap:4px;background:var(--ink)}
+.tab{flex:1;padding:8px;text-align:center;font-size:13px;font-weight:500;border-radius:var(--r-full);cursor:pointer;color:rgba(255,255,255,.4);border:none;background:transparent;font-family:inherit;transition:all .15s}
+.tab.active{background:rgba(255,255,255,.12);color:#fff}
+.tab-content{flex:1;overflow-y:auto}
+.tab-panel{display:none;padding:20px}
+.tab-panel.active{display:block}
 
-.enc-card { background:var(--surface); border:0.5px solid var(--border); border-radius:var(--r-lg); padding:16px; margin-bottom:12px; }
-.enc-label { font-size:11px; font-weight:600; letter-spacing:0.8px; text-transform:uppercase; color:var(--text-3); margin-bottom:12px; }
-.bid-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:0.5px solid var(--border); }
-.bid-row:last-child { border-bottom:none; }
-.bid-row.current { background:var(--surface-alt); margin:0 -16px; padding:10px 16px; }
-.bid-left { display:flex; align-items:center; gap:8px; }
-.cur-dot { width:6px; height:6px; border-radius:3px; background:var(--text); }
-.bid-name { font-size:15px; color:var(--text-2); }
-.bid-name.active { color:var(--text); font-weight:500; }
-.bid-chip { background:var(--surface-alt); border-radius:var(--r-full); padding:4px 12px; font-size:13px; font-weight:500; color:var(--text-2); }
-.bid-chip.high { background:var(--text); color:#fff; }
-.pass-text,.dash-text { font-size:13px; color:var(--text-3); }
-.bid-control { display:flex; align-items:center; justify-content:center; gap:28px; padding:16px 0; }
-.ctrl-btn { width:48px; height:48px; border-radius:var(--r-full); border:0.5px solid var(--border-strong); background:transparent; font-size:22px; cursor:pointer; color:var(--text); display:flex; align-items:center; justify-content:center; font-family:inherit; }
-.ctrl-btn:disabled { opacity:0.3; }
-.ctrl-btn:active:not(:disabled) { background:var(--surface-alt); }
-.bid-val-wrap { text-align:center; }
-.bid-val-num { font-size:44px; font-weight:600; letter-spacing:-1px; color:var(--text); line-height:1; }
-.bid-val-label { font-size:12px; color:var(--text-3); margin-top:2px; }
-.action-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px; }
-.btn-dark { background:var(--text); color:#fff; border:none; border-radius:var(--r-md); padding:14px; font-size:15px; font-weight:500; cursor:pointer; font-family:inherit; }
-.btn-dark:active { opacity:0.85; }
-.btn-outline { background:transparent; color:var(--text-2); border:0.5px solid var(--border-strong); border-radius:var(--r-md); padding:14px; font-size:15px; font-weight:500; cursor:pointer; font-family:inherit; }
-.btn-outline:active { background:var(--surface-alt); }
-.contract-name { font-size:17px; font-weight:600; margin-bottom:2px; }
-.contract-detail { font-size:13px; color:var(--text-2); margin-bottom:16px; }
-.result-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.result-win,.result-lose { border-radius:var(--r-md); padding:20px 16px; text-align:center; cursor:pointer; border:none; width:100%; font-family:inherit; }
-.result-win { background:var(--green-light); }
-.result-lose { background:var(--red-light); }
-.result-win:active,.result-lose:active { opacity:0.8; }
-.result-icon { font-size:20px; margin-bottom:4px; }
-.result-label { font-size:12px; color:var(--text-2); margin-bottom:6px; }
-.result-delta { font-size:28px; font-weight:600; letter-spacing:-0.5px; }
-.delta-win { color:var(--green-text); }
-.delta-lose { color:var(--red-text); }
+/* scores */
+.manche-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--r-full);font-size:12px;font-weight:600}
+.chip-dark{background:var(--ink);color:#fff}
+.chip-light{background:var(--surface2);color:var(--ink2)}
+.p-card{background:var(--surface);border-radius:var(--r-lg);border:1px solid var(--border);padding:18px;margin-bottom:12px;box-shadow:var(--shadow)}
+.p-card.lead{border-color:var(--ink);border-width:1.5px}
+.p-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.p-left{display:flex;align-items:center;gap:10px}
+.p-av{width:38px;height:38px;border-radius:var(--r-full);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.p-name{font-size:15px;font-weight:600}
+.dist-pill{background:var(--surface2);border-radius:var(--r-full);padding:3px 8px;font-size:11px;color:var(--ink3)}
+.p-score{font-size:34px;font-weight:600;letter-spacing:-1px;font-family:'DM Mono',monospace}
+.s-pos{color:var(--green-ink)}.s-neg{color:var(--red-ink)}.s-zero{color:var(--ink3)}
+.track{height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;margin-bottom:5px}
+.track-fill{height:100%;border-radius:3px;transition:width .4s}
+.track-lbls{display:flex;justify-content:space-between}
+.track-lbl{font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace}
 
-.empty-state { text-align:center; padding:60px 20px; color:var(--text-3); font-size:14px; }
-.chart-wrap { background:var(--surface); border:0.5px solid var(--border); border-radius:var(--r-lg); padding:16px; margin-bottom:12px; }
-.legend { display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; }
-.legend-item { display:flex; align-items:center; gap:6px; }
-.legend-dot { width:8px; height:8px; border-radius:4px; }
-.legend-text { font-size:12px; color:var(--text-2); }
-.hist-card { background:var(--surface); border:0.5px solid var(--border); border-radius:var(--r-lg); overflow:hidden; }
-.hist-row { display:flex; align-items:center; padding:12px 16px; border-bottom:0.5px solid var(--border); gap:12px; }
-.hist-row:last-child { border-bottom:none; }
-.hist-manche { font-size:11px; color:var(--text-3); min-width:18px; }
-.hist-info { flex:1; }
-.hist-bidder { font-size:14px; font-weight:500; color:var(--text); }
-.hist-bid { font-size:12px; color:var(--text-3); }
-.hist-badge { padding:3px 10px; border-radius:var(--r-full); font-size:12px; font-weight:600; }
-.hbadge-win { background:var(--green-light); color:var(--green-text); }
-.hbadge-lose { background:var(--red-light); color:var(--red-text); }
+/* ── MISE PANEL ── */
+.mise-card{background:var(--surface);border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow);margin-bottom:12px}
+.mise-header{padding:16px 18px;border-bottom:1px solid var(--border)}
+.mise-title{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
 
-#gameover { align-items:center; justify-content:center; padding:32px 20px; }
-.trophy-wrap { width:80px; height:80px; border-radius:var(--r-full); background:#FFF9DB; display:flex; align-items:center; justify-content:center; font-size:36px; margin-bottom:20px; }
-.go-label { font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--text-3); margin-bottom:6px; }
-.go-winner { font-size:28px; font-weight:600; letter-spacing:-0.5px; margin-bottom:4px; }
-.go-sub { font-size:14px; color:var(--text-3); margin-bottom:32px; }
-.podium { width:100%; background:var(--surface); border:0.5px solid var(--border); border-radius:var(--r-lg); overflow:hidden; margin-bottom:24px; }
-.podium-row { display:flex; align-items:center; padding:14px 16px; border-bottom:0.5px solid var(--border); gap:14px; }
-.podium-row:last-child { border-bottom:none; }
-.podium-row.first { background:#FFFBEB; }
-.podium-rank { font-size:12px; color:var(--text-3); min-width:16px; }
-.podium-name { flex:1; font-size:15px; font-weight:500; }
-.podium-score { font-size:22px; font-weight:600; letter-spacing:-0.5px; }
+/* Player selector */
+.player-selector{display:grid;gap:8px}
+.pl-option{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--r);border:1.5px solid var(--border);cursor:pointer;background:var(--surface2);transition:all .15s}
+.pl-option.selected{border-color:var(--ink);background:var(--ink)}
+.pl-option.selected .pl-name{color:#fff}
+.pl-av-sm{width:30px;height:30px;border-radius:var(--r-full);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.pl-name{font-size:15px;font-weight:500;color:var(--ink)}
+.pl-check{margin-left:auto;width:20px;height:20px;border-radius:var(--r-full);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:transparent}
+.pl-option.selected .pl-check{background:#fff;border-color:#fff;color:var(--ink)}
+
+/* Bid input */
+.bid-input-wrap{padding:18px;border-bottom:1px solid var(--border)}
+.bid-input-lbl{font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.bid-input-row{display:flex;align-items:center;gap:10px}
+.bid-input{flex:1;border:1.5px solid var(--border);border-radius:var(--r);padding:14px 16px;font-size:28px;font-weight:700;font-family:'DM Mono',monospace;color:var(--ink);background:var(--surface2);outline:none;text-align:center;min-width:0}
+.bid-input:focus{border-color:var(--ink);background:#fff}
+.bid-pts-label{font-size:14px;color:var(--ink3);font-weight:500;white-space:nowrap}
+.pts-preview{padding:12px 18px;background:var(--surface2)}
+.pts-preview-txt{font-size:13px;color:var(--ink2)}
+.pts-preview-txt strong{color:var(--ink)}
+
+/* cartes */
+.cartes-wrap{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cartes-lbl{font-size:14px;font-weight:500;color:var(--ink)}
+.cartes-ctrl{display:flex;align-items:center;gap:14px}
+.sm-ctrl{width:36px;height:36px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--surface2);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);font-family:inherit}
+.sm-ctrl:disabled{opacity:.3}
+.sm-ctrl:active:not(:disabled){background:var(--surface3)}
+.cartes-num{font-size:20px;font-weight:700;font-family:'DM Mono',monospace;min-width:24px;text-align:center}
+
+/* result */
+.result-wrap{padding:16px 18px}
+.result-lbl{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.r-win,.r-lose{border-radius:var(--r);padding:20px 16px;text-align:center;cursor:pointer;border:none;width:100%;font-family:inherit}
+.r-win{background:var(--green-bg)}.r-lose{background:var(--red-bg)}
+.r-win:active,.r-lose:active{opacity:.8}
+.r-icon{font-size:20px;margin-bottom:5px}
+.r-lbl{font-size:12px;color:var(--ink2);margin-bottom:6px;font-weight:500}
+.r-delta{font-size:28px;font-weight:700;letter-spacing:-1px;font-family:'DM Mono',monospace}
+.r-delta.pos{color:var(--green-ink)}.r-delta.neg{color:var(--red-ink)}
+
+/* historique */
+.empty{text-align:center;padding:60px 20px;color:var(--ink3);font-size:14px}
+.chart-card{background:var(--surface);border-radius:var(--r-lg);border:1px solid var(--border);padding:18px;margin-bottom:12px;box-shadow:var(--shadow)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.leg-item{display:flex;align-items:center;gap:6px}
+.leg-dot{width:8px;height:8px;border-radius:4px}
+.leg-txt{font-size:12px;color:var(--ink2);font-weight:500}
+.h-card{background:var(--surface);border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow)}
+.h-row{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--border);gap:12px}
+.h-row:last-child{border-bottom:none}
+.h-num{font-size:11px;color:var(--ink3);min-width:20px;font-family:'DM Mono',monospace}
+.h-info{flex:1}
+.h-who{font-size:14px;font-weight:600;color:var(--ink)}
+.h-detail{font-size:12px;color:var(--ink3);margin-top:1px}
+.h-badge{padding:4px 11px;border-radius:var(--r-full);font-size:12px;font-weight:700;font-family:'DM Mono',monospace}
+.hb-win{background:var(--green-bg);color:var(--green-ink)}
+.hb-lose{background:var(--red-bg);color:var(--red-ink)}
+
+/* ── GAMEOVER ── */
+#gameover{background:var(--ink);align-items:center;justify-content:center;padding:40px 24px}
+.go-trophy{font-size:52px;margin-bottom:20px}
+.go-sub-lbl{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px}
+.go-name{font-size:32px;font-weight:600;color:#fff;letter-spacing:-0.5px;margin-bottom:4px}
+.go-reason{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:36px}
+.go-podium{width:100%;border-radius:var(--r-lg);overflow:hidden;margin-bottom:28px;border:1px solid rgba(255,255,255,.08)}
+.go-row{display:flex;align-items:center;padding:15px 18px;border-bottom:1px solid rgba(255,255,255,.06);gap:14px}
+.go-row:last-child{border-bottom:none}
+.go-row.first{background:rgba(255,255,255,.06)}
+.go-rank{font-size:12px;color:rgba(255,255,255,.3);min-width:16px;font-family:'DM Mono',monospace}
+.go-pname{flex:1;font-size:15px;font-weight:500;color:#fff}
+.go-pscore{font-size:22px;font-weight:700;font-family:'DM Mono',monospace}
+.go-pos{color:#4ade80}.go-neg{color:#f87171}.go-zero{color:rgba(255,255,255,.3)}
+.go-btn{width:100%;background:#fff;color:var(--ink);border:none;border-radius:var(--r-lg);padding:17px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
 </style>
 </head>
 <body>
 
+<!-- SETUP -->
 <div id="setup" class="screen active">
-  <div class="setup-title">Belote de comptoir</div>
-  <div class="setup-sub">Nouvelle partie</div>
-  <div class="section-label">Joueurs</div>
-  <div class="card" id="players-card">
-    <div class="field-row"><div class="avatar" id="av0">1</div><input type="text" placeholder="Joueur 1" id="p0" oninput="updateAvatar(0)"></div>
-    <div class="field-row"><div class="avatar" id="av1">2</div><input type="text" placeholder="Joueur 2" id="p1" oninput="updateAvatar(1)"></div>
+  <div class="setup-hero">
+    <h1>Belote de comptoir</h1>
+    <p>Nouvelle partie</p>
   </div>
-  <div class="add-link" id="add-player-btn" onclick="addPlayer()">+ Ajouter un joueur</div>
-  <div class="section-label">Score de la partie</div>
-  <div class="card">
-    <div class="two-col">
-      <div class="mini-field"><label>Victoire à</label><input type="number" id="cfg-win" value="6" min="1"></div>
-      <div class="mini-field"><label>Élimination à</label><input type="number" id="cfg-elim" value="-6"></div>
+  <div class="setup-body">
+    <div class="sec-label">Joueurs</div>
+    <div class="card" id="players-card">
+      <div class="field-row"><div class="av" id="av0" style="background:#E8F0FE;color:#1A56C4">1</div><input type="text" placeholder="Joueur 1" id="p0" oninput="updateAv(0)"></div>
+      <div class="field-row"><div class="av" id="av1" style="background:#E6F7F2;color:#006647">2</div><input type="text" placeholder="Joueur 2" id="p1" oninput="updateAv(1)"></div>
     </div>
+    <div class="card" style="margin-top:8px" id="add-p-card">
+      <div class="add-row" onclick="addPlayer()"><span>+ Ajouter un joueur</span></div>
+    </div>
+
+    <div class="sec-label">Score de la partie</div>
+    <div class="card">
+      <div class="two-col">
+        <div><div class="mini-lbl">Victoire à</div><input class="mini-input" type="number" id="cfg-win" value="6" min="1"></div>
+        <div><div class="mini-lbl">Élimination à</div><input class="mini-input" type="number" id="cfg-elim" value="-6"></div>
+      </div>
+    </div>
+
+    <div class="sec-label">Seuils de points</div>
+    <div class="card" id="seuils-card">
+      <div class="seuil-row"><span>Mise ≥</span><input type="number" value="1" class="seuil-inp smin"><span>pts → ±</span><input type="number" value="1" class="seuil-inp spts"><span>pts</span><button class="rm-btn" onclick="rmSeuil(this)">×</button></div>
+      <div class="seuil-row"><span>Mise ≥</span><input type="number" value="51" class="seuil-inp smin"><span>pts → ±</span><input type="number" value="2" class="seuil-inp spts"><span>pts</span><button class="rm-btn" onclick="rmSeuil(this)">×</button></div>
+      <div class="seuil-row"><span>Mise ≥</span><input type="number" value="61" class="seuil-inp smin"><span>pts → ±</span><input type="number" value="3" class="seuil-inp spts"><span>pts</span><button class="rm-btn" onclick="rmSeuil(this)">×</button></div>
+    </div>
+    <div class="card" style="margin-top:8px">
+      <div class="add-row" onclick="addSeuil()"><span>+ Ajouter un seuil</span></div>
+    </div>
+
+    <div id="history-section"></div>
+    <button class="start-btn" onclick="startGame()">Commencer la partie</button>
   </div>
-  <div class="section-label">Seuils de points</div>
-  <div class="card" id="seuils-card">
-    <div class="seuil-row"><span>Mise ≥</span><input type="number" value="1" class="smin"><span>pts → ±</span><input type="number" value="1" class="spts"><span>pts</span><button class="rm-btn" onclick="removeSeuil(this)">×</button></div>
-    <div class="seuil-row"><span>Mise ≥</span><input type="number" value="61" class="smin"><span>pts → ±</span><input type="number" value="2" class="spts"><span>pts</span><button class="rm-btn" onclick="removeSeuil(this)">×</button></div>
-    <div class="seuil-row"><span>Mise ≥</span><input type="number" value="71" class="smin"><span>pts → ±</span><input type="number" value="3" class="spts"><span>pts</span><button class="rm-btn" onclick="removeSeuil(this)">×</button></div>
-  </div>
-  <div class="add-link" onclick="addSeuil()">+ Ajouter un seuil</div>
-  <button class="btn-primary" onclick="startGame()">Commencer</button>
 </div>
 
+<!-- GAME -->
 <div id="game" class="screen">
-  <div class="game-header">
-    <div class="game-title">Belote de comptoir</div>
-    <button class="new-btn" onclick="newGame()">Nouvelle partie</button>
+  <div class="g-header">
+    <div class="g-title">Belote de comptoir</div>
+    <button class="g-new" onclick="newGame()">Nouvelle</button>
   </div>
   <div class="tab-bar">
     <button class="tab active" onclick="switchTab('scores')">Scores</button>
-    <button class="tab" onclick="switchTab('encheres')">Enchères</button>
+    <button class="tab" onclick="switchTab('encheres')">Manche</button>
     <button class="tab" onclick="switchTab('historique')">Historique</button>
   </div>
   <div class="tab-content">
@@ -188,177 +236,207 @@ html,body { height:100%; background:var(--bg); font-family:-apple-system,'SF Pro
   </div>
 </div>
 
+<!-- GAMEOVER -->
 <div id="gameover" class="screen">
-  <div class="trophy-wrap">🏆</div>
-  <div class="go-label">Victoire</div>
-  <div class="go-winner" id="go-winner"></div>
-  <div class="go-sub" id="go-sub"></div>
-  <div class="podium" id="go-podium"></div>
-  <button class="btn-primary" onclick="newGame()">Nouvelle partie</button>
+  <div class="go-trophy">🏆</div>
+  <div class="go-sub-lbl">Victoire</div>
+  <div class="go-name" id="go-name"></div>
+  <div class="go-reason" id="go-reason"></div>
+  <div class="go-podium" id="go-podium"></div>
+  <button class="go-btn" onclick="newGame()">Nouvelle partie</button>
 </div>
 
 <script>
-let G = { players:[], scores:[], distributor:0, manche:1, history:[], cfg:{win:6,elim:-6,seuils:[]}, enc:{bids:[],currentBidder:0,highBid:0,highBidder:-1}, phase:'setup', winner:null };
-let bidValue = 1;
-const COLORS = ['#2563EB','#1D9E75','#D85A30','#7F77DD'];
-const AV_COLORS = [{bg:'#EFF6FF',c:'#1D4ED8'},{bg:'#F0FDF4',c:'#15803D'},{bg:'#FFF7ED',c:'#C2410C'},{bg:'#FAF5FF',c:'#7E22CE'}];
+const AV=[{bg:'#E8F0FE',c:'#1A56C4'},{bg:'#E6F7F2',c:'#006647'},{bg:'#FEF0E8',c:'#C43A14'},{bg:'#F3E8FE',c:'#7C1AC4'}];
+const LC=['#2563EB','#00A876','#E04E2A','#7C3AED'];
+let PC=2;
+let pastGames=JSON.parse(localStorage.getItem('belote_games')||'[]');
+let G={};
+let selBidder=-1, cartesVal=3;
 
-let playerCount = 2;
-function updateAvatar(i) {
-  const v = document.getElementById('p'+i).value;
-  document.getElementById('av'+i).textContent = v ? v[0].toUpperCase() : (i+1);
+function updateAv(i){const v=document.getElementById('p'+i).value;document.getElementById('av'+i).textContent=v?v[0].toUpperCase():(i+1);}
+function addPlayer(){
+  if(PC>=4)return;
+  const card=document.getElementById('players-card'),row=document.createElement('div');
+  row.className='field-row';row.id='prow'+PC;
+  row.innerHTML=`<div class="av" id="av${PC}" style="background:${AV[PC%4].bg};color:${AV[PC%4].c}">${PC+1}</div><input type="text" placeholder="Joueur ${PC+1}" id="p${PC}" oninput="updateAv(${PC})"><button class="rm-btn" onclick="rmPlayer(${PC})">×</button>`;
+  card.appendChild(row);PC++;
+  if(PC>=4)document.getElementById('add-p-card').style.display='none';
 }
-function addPlayer() {
-  if (playerCount >= 4) return;
-  const card = document.getElementById('players-card');
-  const row = document.createElement('div');
-  row.className = 'field-row'; row.id = 'prow'+playerCount;
-  row.innerHTML = `<div class="avatar" id="av${playerCount}">${playerCount+1}</div><input type="text" placeholder="Joueur ${playerCount+1}" id="p${playerCount}" oninput="updateAvatar(${playerCount})"><button class="rm-btn" onclick="removePlayer(${playerCount})">×</button>`;
-  card.appendChild(row); playerCount++;
-  if (playerCount >= 4) document.getElementById('add-player-btn').style.display = 'none';
-}
-function removePlayer(i) {
-  const row = document.getElementById('prow'+i);
-  if (row) row.remove(); playerCount--;
-  document.getElementById('add-player-btn').style.display = 'block';
-}
-function addSeuil() {
-  const card = document.getElementById('seuils-card');
-  const row = document.createElement('div'); row.className = 'seuil-row';
-  row.innerHTML = `<span>Mise ≥</span><input type="number" value="81" class="smin"><span>pts → ±</span><input type="number" value="4" class="spts"><span>pts</span><button class="rm-btn" onclick="removeSeuil(this)">×</button>`;
-  card.appendChild(row);
-}
-function removeSeuil(btn) { btn.parentElement.remove(); }
-function getSeuils() {
-  return [...document.querySelectorAll('#seuils-card .seuil-row')].map(r=>({min:parseInt(r.querySelector('.smin').value)||0,pts:parseInt(r.querySelector('.spts').value)||1}));
-}
-function getPointsForBid(bid) {
-  const sorted = [...G.cfg.seuils].sort((a,b)=>b.min-a.min);
-  for (const s of sorted) if (bid >= s.min) return s.pts;
-  return 1;
-}
-function startGame() {
-  const names = [];
-  for (let i=0;i<4;i++) { const el=document.getElementById('p'+i); if(el) names.push(el.value.trim()||`Joueur ${i+1}`); }
-  const win = parseInt(document.getElementById('cfg-win').value)||6;
-  const elim = parseInt(document.getElementById('cfg-elim').value)||-6;
-  G = { players:names, scores:names.map(()=>0), distributor:0, manche:1, history:[], cfg:{win,elim,seuils:getSeuils()}, enc:initEnc(names.length,0), phase:'enchere', winner:null };
-  bidValue = 1; show('game'); renderAll();
-}
-function initEnc(n,dist) {
-  return { bids:Array(n).fill(null).map(()=>({bid:0,passed:false})), currentBidder:(dist+1)%n, highBid:0, highBidder:-1 };
+function rmPlayer(i){const r=document.getElementById('prow'+i);if(r)r.remove();PC--;document.getElementById('add-p-card').style.display='';}
+function addSeuil(){const c=document.getElementById('seuils-card'),r=document.createElement('div');r.className='seuil-row';r.innerHTML=`<span>Mise ≥</span><input type="number" value="71" class="seuil-inp smin"><span>pts → ±</span><input type="number" value="4" class="seuil-inp spts"><span>pts</span><button class="rm-btn" onclick="rmSeuil(this)">×</button>`;c.appendChild(r);}
+function rmSeuil(b){b.parentElement.remove();}
+function getSeuils(){return[...document.querySelectorAll('#seuils-card .seuil-row')].map(r=>({min:parseInt(r.querySelector('.smin').value)||0,pts:parseInt(r.querySelector('.spts').value)||1}));}
+function ptsForBid(bid){const s=[...G.cfg.seuils].sort((a,b)=>b.min-a.min);for(const x of s)if(bid>=x.min)return x.pts;return 1;}
+
+function renderPastGames(){
+  const el=document.getElementById('history-section');
+  if(!pastGames.length){el.innerHTML='';return;}
+  const wins={};
+  pastGames.forEach(g=>{wins[g.winner]=(wins[g.winner]||0)+1;});
+  const we=Object.entries(wins).sort((a,b)=>b[1]-a[1]);
+  let h=`<div class="sec-label" style="margin-top:28px">Parties précédentes</div>`;
+  h+=`<div class="card"><div class="wins-row">`;
+  we.forEach(([name,count],i)=>{h+=`<div class="win-chip"><div class="win-av" style="background:${AV[i%4].bg};color:${AV[i%4].c}">${name[0].toUpperCase()}</div><span class="win-name">${name}</span><span class="win-count">&nbsp;${count}v</span></div>`;});
+  h+=`</div></div><div class="card" style="margin-top:8px">`;
+  [...pastGames].reverse().slice(0,8).forEach(g=>{h+=`<div class="hist-entry"><div class="hist-info"><div class="hist-names">${g.players.join(' · ')}</div><div class="hist-date">${g.date} · ${g.manches} manches</div></div><div class="hist-winner">🏆 ${g.winner}</div></div>`;});
+  h+=`</div>`;
+  el.innerHTML=h;
 }
 
-function renderAll() { renderScores(); renderEncheres(); }
+function startGame(){
+  const names=[];
+  for(let i=0;i<4;i++){const el=document.getElementById('p'+i);if(el)names.push(el.value.trim()||`Joueur ${i+1}`);}
+  const win=parseInt(document.getElementById('cfg-win').value)||6;
+  const elim=parseInt(document.getElementById('cfg-elim').value)||-6;
+  G={players:names,scores:names.map(()=>0),distributor:0,manche:1,history:[],cfg:{win,elim,seuils:getSeuils()}};
+  selBidder=-1;cartesVal=3;
+  show('game');renderAll();switchTab('encheres');
+}
 
-function renderScores() {
-  const {players,scores,cfg,distributor,manche} = G;
-  const range = cfg.win - cfg.elim; const maxScore = Math.max(...scores);
-  let html = `<div class="info-row"><span class="badge badge-neutral">Manche ${manche}</span><span class="badge badge-blue">Distributeur : ${players[distributor]}</span></div>`;
+function renderAll(){renderScores();renderManche();}
+
+function renderScores(){
+  const{players,scores,cfg,distributor,manche}=G;
+  const range=cfg.win-cfg.elim,maxS=Math.max(...scores);
+  let h=`<div class="manche-bar"><div class="chip chip-dark">Manche ${manche}</div><div class="chip chip-light">Dist. ${players[distributor]}</div></div>`;
   players.forEach((p,i)=>{
-    const s=scores[i], leading=s===maxScore, pct=Math.max(0,Math.min(100,((s-cfg.elim)/range)*100));
-    const col=s>=0?'var(--green)':'var(--red)', scls=s>=0?'score-pos':'score-neg', av=AV_COLORS[i%4];
-    html+=`<div class="player-card${leading?' leading':''}"><div class="pc-top"><div class="pc-left"><div class="pc-avatar" style="background:${av.bg};color:${av.c}">${p[0]?.toUpperCase()||'?'}</div><div class="pc-name">${p}</div>${i===distributor?'<div class="dist-tag">dist.</div>':''}</div><div class="pc-score ${scls}">${s>0?'+'+s:s}</div></div><div class="track"><div class="track-fill" style="width:${pct}%;background:${col}"></div></div><div class="track-labels"><span class="track-label">${cfg.elim}</span><span class="track-label">0</span><span class="track-label">${cfg.win}</span></div></div>`;
+    const s=scores[i],lead=s===maxS;
+    const pct=Math.max(0,Math.min(100,((s-cfg.elim)/range)*100));
+    const fc=s>0?'var(--green)':s<0?'var(--red)':'var(--border)';
+    const sc=s>0?'s-pos':s<0?'s-neg':'s-zero';
+    const av=AV[i%4];
+    h+=`<div class="p-card${lead?' lead':''}"><div class="p-top"><div class="p-left"><div class="p-av" style="background:${av.bg};color:${av.c}">${p[0]?.toUpperCase()||'?'}</div><div class="p-name">${p}</div>${i===distributor?'<div class="dist-pill">dist.</div>':''}</div><div class="p-score ${sc}">${s>0?'+'+s:s}</div></div><div class="track"><div class="track-fill" style="width:${pct}%;background:${fc}"></div></div><div class="track-lbls"><span class="track-lbl">${cfg.elim}</span><span class="track-lbl">0</span><span class="track-lbl">${cfg.win}</span></div></div>`;
   });
-  document.getElementById('tab-scores').innerHTML = html;
+  document.getElementById('tab-scores').innerHTML=h;
 }
 
-function renderEncheres() {
-  const {players,enc,phase} = G;
-  const pts = phase==='result' ? getPointsForBid(enc.highBid) : 0;
-  let html = `<div class="enc-card"><div class="enc-label">Enchères en cours</div>`;
+function renderManche(){
+  const{players,manche,distributor}=G;
+  const bidInput=document.getElementById('bid-val-input');
+  const currentBid=bidInput?parseInt(bidInput.value)||0:0;
+  const pts=currentBid>0?ptsForBid(currentBid):0;
+
+  let h=`<div class="mise-card">`;
+  // Player selector
+  h+=`<div class="mise-header"><div class="mise-title">Qui a remporté les enchères ?</div><div class="player-selector">`;
   players.forEach((p,i)=>{
-    const b=enc.bids[i], isCur=i===enc.currentBidder&&!b.passed&&phase==='enchere', isHigh=i===enc.highBidder;
-    html+=`<div class="bid-row${isCur?' current':''}"><div class="bid-left">${isCur?'<div class="cur-dot"></div>':''}<div class="bid-name${isCur?' active':''}">${p}</div></div>${b.passed?'<span class="pass-text">Passe</span>':b.bid>0?`<div class="bid-chip${isHigh?' high':''}">${b.bid} pts</div>`:'<span class="dash-text">—</span>'}</div>`;
+    const av=AV[i%4],isSel=i===selBidder;
+    h+=`<div class="pl-option${isSel?' selected':''}" onclick="selectBidder(${i})">
+      <div class="pl-av-sm" style="background:${av.bg};color:${av.c}">${p[0]?.toUpperCase()||'?'}</div>
+      <span class="pl-name">${p}</span>
+      <div class="pl-check">✓</div>
+    </div>`;
   });
-  html += '</div>';
-  if (phase==='enchere') {
-    const cur=enc.currentBidder, minBid=enc.highBid+1;
-    if(bidValue<minBid) bidValue=minBid;
-    html+=`<div class="enc-card"><div class="enc-label">Tour de ${players[cur]}</div><div class="bid-control"><button class="ctrl-btn" onclick="changeBid(-1)" ${bidValue<=minBid?'disabled':''}>−</button><div class="bid-val-wrap"><div class="bid-val-num" id="bid-display">${bidValue}</div><div class="bid-val-label">points</div></div><button class="ctrl-btn" onclick="changeBid(1)">+</button></div><div class="action-row"><button class="btn-dark" onclick="placeBid()">Miser</button><button class="btn-outline" onclick="passBid()">Passer</button></div></div>`;
-  }
-  if (phase==='result') {
-    html+=`<div class="enc-card"><div class="enc-label">Contrat</div><div class="contract-name">${players[enc.highBidder]}</div><div class="contract-detail">Mise de ${enc.highBid} pts — enjeu ±${pts} point${pts>1?'s':''}</div><div class="enc-label">Résultat</div><div class="result-row"><button class="result-win" onclick="applyResult(true)"><div class="result-icon">✓</div><div class="result-label">Réussi</div><div class="result-delta delta-win">+${pts}</div></button><button class="result-lose" onclick="applyResult(false)"><div class="result-icon">✗</div><div class="result-label">Chuté</div><div class="result-delta delta-lose">−${pts}</div></button></div></div>`;
-  }
-  document.getElementById('tab-encheres').innerHTML = html;
+  h+=`</div></div>`;
+
+  // Bid amount
+  h+=`<div class="bid-input-wrap">
+    <div class="bid-input-lbl">Montant de la mise</div>
+    <div class="bid-input-row">
+      <input class="bid-input" type="number" id="bid-val-input" placeholder="ex: 52" min="1" oninput="updatePtsPreview()" value="${currentBid||''}">
+      <span class="bid-pts-label">points</span>
+    </div>
+  </div>
+  <div class="pts-preview" id="pts-preview">${pts>0?`<span class="pts-preview-txt">Enjeu : <strong>±${pts} point${pts>1?'s':''}</strong></span>`:'<span class="pts-preview-txt" style="color:var(--ink3)">Saisissez une mise pour voir l\'enjeu</span>'}</div>`;
+
+  // Cartes
+  h+=`<div class="cartes-wrap">
+    <span class="cartes-lbl">Cartes distribuées</span>
+    <div class="cartes-ctrl">
+      <button class="sm-ctrl" onclick="chgCartes(-1)" ${cartesVal<=1?'disabled':''}>−</button>
+      <span class="cartes-num" id="cartes-disp">${cartesVal}</span>
+      <button class="sm-ctrl" onclick="chgCartes(1)" ${cartesVal>=5?'disabled':''}>+</button>
+    </div>
+  </div>`;
+
+  // Result buttons
+  h+=`<div class="result-wrap"><div class="result-lbl">Résultat</div><div class="result-grid">
+    <button class="r-win" onclick="applyResult(true)"><div class="r-icon">✓</div><div class="r-lbl">Réussi</div><div class="r-delta pos">${pts>0?'+'+pts:'…'}</div></button>
+    <button class="r-lose" onclick="applyResult(false)"><div class="r-icon">✗</div><div class="r-lbl">Chuté</div><div class="r-delta neg">${pts>0?'−'+pts:'…'}</div></button>
+  </div></div>`;
+
+  h+=`</div>`;
+  document.getElementById('tab-encheres').innerHTML=h;
 }
 
-function changeBid(d) {
-  const minBid=G.enc.highBid+1; bidValue=Math.max(minBid,bidValue+d); renderEncheres();
+function selectBidder(i){selBidder=i;renderManche();}
+function updatePtsPreview(){
+  const inp=document.getElementById('bid-val-input');
+  const bid=parseInt(inp?.value)||0;
+  const pts=bid>0?ptsForBid(bid):0;
+  const prev=document.getElementById('pts-preview');
+  if(prev)prev.innerHTML=pts>0?`<span class="pts-preview-txt">Enjeu : <strong>±${pts} point${pts>1?'s':''}</strong></span>`:'<span class="pts-preview-txt" style="color:var(--ink3)">Saisissez une mise pour voir l\'enjeu</span>';
+  // update result buttons delta live
+  renderManche();
 }
-function placeBid() {
-  const {enc,players}=G, cur=enc.currentBidder, n=players.length;
-  enc.bids[cur].bid=bidValue; enc.highBid=bidValue; enc.highBidder=cur;
-  const remaining=enc.bids.filter((b,i)=>!b.passed&&i!==cur);
-  if(remaining.length===0){G.phase='result';renderAll();return;}
-  let next=(cur+1)%n,t=0;
-  while((enc.bids[next].passed||next===cur)&&t<n){next=(next+1)%n;t++;}
-  enc.currentBidder=next; bidValue=enc.highBid+1; renderAll();
+function chgCartes(d){cartesVal=Math.max(1,Math.min(5,cartesVal+d));renderManche();}
+
+function applyResult(success){
+  const inp=document.getElementById('bid-val-input');
+  const bid=parseInt(inp?.value)||0;
+  if(selBidder<0){alert('Choisissez qui a remporté les enchères.');return;}
+  if(bid<=0){alert('Saisissez le montant de la mise.');return;}
+  const pts=ptsForBid(bid),delta=success?pts:-pts;
+  G.scores[selBidder]+=delta;
+  G.history.push({manche:G.manche,bidder:selBidder,bid,cartes:cartesVal,pts,success,scores:[...G.scores]});
+  if(checkWin())return;
+  const n=G.players.length;
+  G.manche++;G.distributor=(G.distributor+1)%n;
+  selBidder=-1;cartesVal=3;
+  renderAll();switchTab('scores');
 }
-function passBid() {
-  const {enc,players}=G, cur=enc.currentBidder, n=players.length;
-  enc.bids[cur].passed=true;
-  const remaining=enc.bids.filter((b,i)=>!b.passed&&i!==enc.highBidder);
-  if(remaining.length===0){if(enc.highBidder>=0){G.phase='result';renderAll();return;}nextManche();return;}
-  let next=(cur+1)%n,t=0;
-  while((enc.bids[next].passed||next===enc.highBidder)&&t<n){next=(next+1)%n;t++;}
-  enc.currentBidder=next; renderAll();
-}
-function applyResult(success) {
-  const pts=getPointsForBid(G.enc.highBid), delta=success?pts:-pts;
-  G.scores[G.enc.highBidder]+=delta;
-  G.history.push({manche:G.manche,bidder:G.enc.highBidder,bid:G.enc.highBid,pts,success,scores:[...G.scores]});
-  if(checkWin()) return; nextManche();
-}
-function nextManche() {
-  const n=G.players.length; G.manche++; G.distributor=(G.distributor+1)%n;
-  G.enc=initEnc(n,G.distributor); G.phase='enchere'; bidValue=1; renderAll(); switchTab('scores');
-}
-function checkWin() {
-  const {scores,players,cfg}=G;
-  for(let i=0;i<scores.length;i++) if(scores[i]>=cfg.win){showWinner(i,'Score maximum atteint');return true;}
-  for(let i=0;i<scores.length;i++) if(scores[i]<=cfg.elim){const w=scores.map((s,j)=>({s,j})).filter(x=>x.j!==i).sort((a,b)=>b.s-a.s)[0];if(w){showWinner(w.j,`${players[i]} est éliminé(e)`);return true;}}
+
+function checkWin(){
+  const{scores,players,cfg}=G;
+  for(let i=0;i<scores.length;i++)if(scores[i]>=cfg.win){showWinner(i,'Score maximum atteint');return true;}
+  for(let i=0;i<scores.length;i++)if(scores[i]<=cfg.elim){const w=scores.map((s,j)=>({s,j})).filter(x=>x.j!==i).sort((a,b)=>b.s-a.s)[0];if(w){showWinner(w.j,`${players[i]} est éliminé(e)`);return true;}}
   return false;
 }
-function showWinner(i,reason) {
-  document.getElementById('go-winner').textContent=G.players[i]+' gagne !';
-  document.getElementById('go-sub').textContent=reason;
+function showWinner(i,reason){
+  const now=new Date();
+  pastGames.push({players:G.players,winner:G.players[i],date:now.toLocaleDateString('fr-FR',{day:'numeric',month:'short'}),manches:G.manche-1,scores:[...G.scores]});
+  localStorage.setItem('belote_games',JSON.stringify(pastGames));
+  document.getElementById('go-name').textContent=G.players[i]+' gagne !';
+  document.getElementById('go-reason').textContent=reason;
   const sorted=G.players.map((p,j)=>({p,s:G.scores[j]})).sort((a,b)=>b.s-a.s);
-  document.getElementById('go-podium').innerHTML=sorted.map((x,rank)=>`<div class="podium-row${rank===0?' first':''}"><div class="podium-rank">${rank+1}</div><div class="podium-name">${x.p}</div><div class="podium-score ${x.s>0?'score-pos':x.s<0?'score-neg':''}">${x.s>0?'+'+x.s:x.s}</div></div>`).join('');
+  document.getElementById('go-podium').innerHTML=sorted.map((x,r)=>`<div class="go-row${r===0?' first':''}"><div class="go-rank">${r+1}</div><div class="go-pname">${x.p}</div><div class="go-pscore ${x.s>0?'go-pos':x.s<0?'go-neg':'go-zero'}">${x.s>0?'+'+x.s:x.s}</div></div>`).join('');
   show('gameover');
 }
-function renderHistorique() {
-  const {history,players,cfg}=G;
-  if(!history.length){document.getElementById('tab-historique').innerHTML='<div class="empty-state">Aucune manche jouée</div>';return;}
-  const allScores=history.map(h=>h.scores).flat();
-  const minV=Math.min(cfg.elim-1,...allScores), maxV=Math.max(cfg.win+1,...allScores), range=maxV-minV||1;
-  const W=document.getElementById('tab-historique').offsetWidth-32, H=160;
-  const toX=i=>(i/Math.max(history.length,1))*W, toY=v=>H-((v-minV)/range)*H;
-  let svg=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block">`;
-  svg+=`<line x1="0" y1="${toY(0).toFixed(1)}" x2="${W}" y2="${toY(0).toFixed(1)}" stroke="#D4D0C8" stroke-width="1"/>`;
-  svg+=`<line x1="0" y1="${toY(cfg.win).toFixed(1)}" x2="${W}" y2="${toY(cfg.win).toFixed(1)}" stroke="#1D9E75" stroke-width="1" stroke-dasharray="4,3"/>`;
-  svg+=`<line x1="0" y1="${toY(cfg.elim).toFixed(1)}" x2="${W}" y2="${toY(cfg.elim).toFixed(1)}" stroke="#D85A30" stroke-width="1" stroke-dasharray="4,3"/>`;
+
+function renderHistorique(){
+  const{history,players,cfg}=G;
+  if(!history.length){document.getElementById('tab-historique').innerHTML='<div class="empty">Aucune manche jouée</div>';return;}
+  const allS=history.map(h=>h.scores).flat();
+  const minV=Math.min(cfg.elim-1,...allS),maxV=Math.max(cfg.win+1,...allS),range=maxV-minV||1;
+  const W=document.getElementById('tab-historique').offsetWidth-40,H=150;
+  const toX=i=>(i/Math.max(history.length,1))*W,toY=v=>H-((v-minV)/range)*H;
+  let svg=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block;overflow:visible">`;
+  svg+=`<line x1="0" y1="${toY(0).toFixed(1)}" x2="${W}" y2="${toY(0).toFixed(1)}" stroke="var(--border)" stroke-width="1.5"/>`;
+  svg+=`<line x1="0" y1="${toY(cfg.win).toFixed(1)}" x2="${W}" y2="${toY(cfg.win).toFixed(1)}" stroke="var(--green)" stroke-width="1" stroke-dasharray="5,3" opacity=".5"/>`;
+  svg+=`<line x1="0" y1="${toY(cfg.elim).toFixed(1)}" x2="${W}" y2="${toY(cfg.elim).toFixed(1)}" stroke="var(--red)" stroke-width="1" stroke-dasharray="5,3" opacity=".5"/>`;
   players.forEach((_,pi)=>{
-    const pts=[0,...history.map(h=>h.scores[pi])], col=COLORS[pi%4];
+    const pts=[0,...history.map(h=>h.scores[pi])],col=LC[pi%4];
     let d=`M${toX(0).toFixed(1)},${toY(pts[0]).toFixed(1)}`;
-    for(let i=1;i<pts.length;i++) d+=` L${toX(i).toFixed(1)},${toY(pts[i]).toFixed(1)}`;
-    svg+=`<path d="${d}" stroke="${col}" stroke-width="2" fill="none"/>`;
-    pts.forEach((v,i)=>{svg+=`<circle cx="${toX(i).toFixed(1)}" cy="${toY(v).toFixed(1)}" r="3.5" fill="${col}"/>`;});
+    for(let i=1;i<pts.length;i++)d+=` L${toX(i).toFixed(1)},${toY(pts[i]).toFixed(1)}`;
+    svg+=`<path d="${d}" stroke="${col}" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>`;
+    pts.forEach((v,i)=>{svg+=`<circle cx="${toX(i).toFixed(1)}" cy="${toY(v).toFixed(1)}" r="4" fill="${col}" stroke="#fff" stroke-width="1.5"/>`;});
   });
   svg+='</svg>';
-  const legend=players.map((p,i)=>`<div class="legend-item"><div class="legend-dot" style="background:${COLORS[i%4]}"></div><div class="legend-text">${p}</div></div>`).join('');
-  const histRows=[...history].reverse().map(h=>`<div class="hist-row"><div class="hist-manche">${h.manche}</div><div class="hist-info"><div class="hist-bidder">${players[h.bidder]}</div><div class="hist-bid">mise ${h.bid} pts</div></div><div class="hist-badge ${h.success?'hbadge-win':'hbadge-lose'}">${h.success?'+':'-'}${h.pts}</div></div>`).join('');
-  document.getElementById('tab-historique').innerHTML=`<div class="chart-wrap">${svg}<div class="legend">${legend}</div></div><div class="hist-card">${histRows}</div>`;
+  const legend=players.map((p,i)=>`<div class="leg-item"><div class="leg-dot" style="background:${LC[i%4]}"></div><span class="leg-txt">${p}</span></div>`).join('');
+  const rows=[...history].reverse().map(h=>`<div class="h-row"><div class="h-num">${h.manche}</div><div class="h-info"><div class="h-who">${players[h.bidder]}</div><div class="h-detail">mise ${h.bid} pts · ${h.cartes||'?'} cartes</div></div><div class="h-badge ${h.success?'hb-win':'hb-lose'}">${h.success?'+':'-'}${h.pts}</div></div>`).join('');
+  document.getElementById('tab-historique').innerHTML=`<div class="chart-card">${svg}<div class="legend">${legend}</div></div><div class="h-card">${rows}</div>`;
 }
 
-function show(id) { ['setup','game','gameover'].forEach(s=>document.getElementById(s).classList.toggle('active',s===id)); }
-function switchTab(id) {
+function show(id){['setup','game','gameover'].forEach(s=>document.getElementById(s).classList.toggle('active',s===id));}
+function switchTab(id){
   const tabs=['scores','encheres','historique'];
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===id));
   document.querySelectorAll('.tab-panel').forEach((p,i)=>p.classList.toggle('active',tabs[i]===id));
-  if(id==='historique') renderHistorique();
+  if(id==='historique')renderHistorique();
 }
-function newGame() { show('setup'); }
+function newGame(){renderPastGames();show('setup');}
+renderPastGames();
 </script>
 </body>
 </html>
