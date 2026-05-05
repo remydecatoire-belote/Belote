@@ -282,7 +282,7 @@ function renderPastGames(){
   const wins={};
   pastGames.forEach(g=>{wins[g.winner]=(wins[g.winner]||0)+1;});
   const we=Object.entries(wins).sort((a,b)=>b[1]-a[1]);
-  let h='<div style="display:flex;align-items:center;justify-content:space-between;margin-top:28px;margin-bottom:8px"><div class="sec-label" style="margin:0">Parties précédentes</div><button onclick="resetHistory()" style="font-size:12px;font-weight:500;color:var(--red-ink);background:var(--red-bg);border:none;border-radius:var(--r-full);padding:4px 12px;cursor:pointer;font-family:inherit">Réinitialiser</button></div>';
+  let h='<div style="display:flex;align-items:center;justify-content:space-between;margin-top:28px;margin-bottom:8px"><div class="sec-label" style="margin:0">Parties précédentes</div><button onclick="resetHistory()" style="font-size:12px;font-weight:600;color:var(--red-ink);background:var(--red-bg);border:1px solid rgba(224,78,42,.2);border-radius:var(--r-full);padding:5px 14px;cursor:pointer;font-family:inherit;letter-spacing:.1px">🗑 Effacer</button></div>';
   h+='<div class="card"><div class="wins-row">';
   we.forEach(([name,count],i)=>{h+=`<div class="win-chip"><div class="win-av" style="background:${AV[i%4].bg};color:${AV[i%4].c}">${name[0].toUpperCase()}</div><span class="win-name">${name}</span><span class="win-count">&nbsp;${count}v</span></div>`;});
   h+='</div></div><div class="card" style="margin-top:8px">';
@@ -372,10 +372,14 @@ function updatePtsPreview(){
   const inp=document.getElementById('bid-val-input');
   const bid=parseInt(inp?.value)||0;
   const pts=bid>0?ptsForBid(bid):0;
+  // update preview text
   const prev=document.getElementById('pts-preview');
   if(prev)prev.innerHTML=pts>0?`<span class="pts-preview-txt">Enjeu : <strong>±${pts} point${pts>1?'s':''}</strong></span>`:'<span class="pts-preview-txt" style="color:var(--ink3)">Saisissez une mise pour voir l\'enjeu</span>';
-  // update result buttons delta live
-  renderManche();
+  // update result button deltas in place — no full re-render to preserve focus
+  const winDelta=document.querySelector('.r-win .r-delta');
+  const loseDelta=document.querySelector('.r-lose .r-delta');
+  if(winDelta)winDelta.textContent=pts>0?'+'+pts:'…';
+  if(loseDelta)loseDelta.textContent=pts>0?'−'+pts:'…';
 }
 function chgCartes(d){cartesVal=Math.max(1,Math.min(5,cartesVal+d));renderManche();}
 
