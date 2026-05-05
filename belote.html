@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#0F0E0D">
 <title>Belote de Comptoir</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500;600&display=swap');
+/* polices système — fonctionne 100% hors ligne */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#F5F4F0;--surface:#FFFFFF;--surface2:#EEECEA;--surface3:#E5E3DE;
@@ -20,7 +20,7 @@
   --r:14px;--r-sm:8px;--r-lg:20px;--r-full:999px;
   --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);
 }
-html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased}
+html,body{height:100%;background:var(--bg);font-family:-apple-system,'SF Pro Text','Segoe UI','Helvetica Neue',Arial,sans-serif;color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased}
 .screen{display:none;flex-direction:column;height:100vh;height:100dvh}
 .screen.active{display:flex}
 
@@ -88,12 +88,12 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
 .p-av{width:38px;height:38px;border-radius:var(--r-full);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
 .p-name{font-size:15px;font-weight:600}
 .dist-pill{background:var(--surface2);border-radius:var(--r-full);padding:3px 8px;font-size:11px;color:var(--ink3)}
-.p-score{font-size:34px;font-weight:600;letter-spacing:-1px;font-family:'DM Mono',monospace}
+.p-score{font-size:34px;font-weight:600;letter-spacing:-1px;font-family:'SF Mono','Fira Code','Cascadia Code','Consolas',monospace}
 .s-pos{color:var(--green-ink)}.s-neg{color:var(--red-ink)}.s-zero{color:var(--ink3)}
 .track{height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;margin-bottom:5px}
 .track-fill{height:100%;border-radius:3px;transition:width .4s}
 .track-lbls{display:flex;justify-content:space-between}
-.track-lbl{font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace}
+.track-lbl{font-size:10px;color:var(--ink3);font-family:'SF Mono','Fira Code','Consolas',monospace}
 
 /* ── MISE PANEL ── */
 .mise-card{background:var(--surface);border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow);margin-bottom:12px}
@@ -114,7 +114,7 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
 .bid-input-wrap{padding:18px;border-bottom:1px solid var(--border)}
 .bid-input-lbl{font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
 .bid-input-row{display:flex;align-items:center;gap:10px}
-.bid-input{flex:1;border:1.5px solid var(--border);border-radius:var(--r);padding:14px 16px;font-size:28px;font-weight:700;font-family:'DM Mono',monospace;color:var(--ink);background:var(--surface2);outline:none;text-align:center;min-width:0}
+.bid-input{flex:1;border:1.5px solid var(--border);border-radius:var(--r);padding:14px 16px;font-size:28px;font-weight:700;font-family:'SF Mono','Fira Code','Consolas',monospace;color:var(--ink);background:var(--surface2);outline:none;text-align:center;min-width:0}
 .bid-input:focus{border-color:var(--ink);background:#fff}
 .bid-pts-label{font-size:14px;color:var(--ink3);font-weight:500;white-space:nowrap}
 .pts-preview{padding:12px 18px;background:var(--surface2)}
@@ -128,7 +128,7 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
 .sm-ctrl{width:36px;height:36px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--surface2);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);font-family:inherit}
 .sm-ctrl:disabled{opacity:.3}
 .sm-ctrl:active:not(:disabled){background:var(--surface3)}
-.cartes-num{font-size:20px;font-weight:700;font-family:'DM Mono',monospace;min-width:24px;text-align:center}
+.cartes-num{font-size:20px;font-weight:700;font-family:'SF Mono','Fira Code','Consolas',monospace;min-width:24px;text-align:center}
 
 /* result */
 .result-wrap{padding:16px 18px}
@@ -139,7 +139,7 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
 .r-win:active,.r-lose:active{opacity:.8}
 .r-icon{font-size:20px;margin-bottom:5px}
 .r-lbl{font-size:12px;color:var(--ink2);margin-bottom:6px;font-weight:500}
-.r-delta{font-size:28px;font-weight:700;letter-spacing:-1px;font-family:'DM Mono',monospace}
+.r-delta{font-size:28px;font-weight:700;letter-spacing:-1px;font-family:'SF Mono','Fira Code','Consolas',monospace}
 .r-delta.pos{color:var(--green-ink)}.r-delta.neg{color:var(--red-ink)}
 
 /* historique */
@@ -152,11 +152,11 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
 .h-card{background:var(--surface);border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow)}
 .h-row{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--border);gap:12px}
 .h-row:last-child{border-bottom:none}
-.h-num{font-size:11px;color:var(--ink3);min-width:20px;font-family:'DM Mono',monospace}
+.h-num{font-size:11px;color:var(--ink3);min-width:20px;font-family:'SF Mono','Fira Code','Consolas',monospace}
 .h-info{flex:1}
 .h-who{font-size:14px;font-weight:600;color:var(--ink)}
 .h-detail{font-size:12px;color:var(--ink3);margin-top:1px}
-.h-badge{padding:4px 11px;border-radius:var(--r-full);font-size:12px;font-weight:700;font-family:'DM Mono',monospace}
+.h-badge{padding:4px 11px;border-radius:var(--r-full);font-size:12px;font-weight:700;font-family:'SF Mono','Fira Code','Consolas',monospace}
 .hb-win{background:var(--green-bg);color:var(--green-ink)}
 .hb-lose{background:var(--red-bg);color:var(--red-ink)}
 
@@ -170,9 +170,9 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
 .go-row{display:flex;align-items:center;padding:15px 18px;border-bottom:1px solid rgba(255,255,255,.06);gap:14px}
 .go-row:last-child{border-bottom:none}
 .go-row.first{background:rgba(255,255,255,.06)}
-.go-rank{font-size:12px;color:rgba(255,255,255,.3);min-width:16px;font-family:'DM Mono',monospace}
+.go-rank{font-size:12px;color:rgba(255,255,255,.3);min-width:16px;font-family:'SF Mono','Fira Code','Consolas',monospace}
 .go-pname{flex:1;font-size:15px;font-weight:500;color:#fff}
-.go-pscore{font-size:22px;font-weight:700;font-family:'DM Mono',monospace}
+.go-pscore{font-size:22px;font-weight:700;font-family:'SF Mono','Fira Code','Consolas',monospace}
 .go-pos{color:#4ade80}.go-neg{color:#f87171}.go-zero{color:rgba(255,255,255,.3)}
 .go-btn{width:100%;background:#fff;color:var(--ink);border:none;border-radius:var(--r-lg);padding:17px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
 </style>
@@ -269,18 +269,25 @@ function rmSeuil(b){b.parentElement.remove();}
 function getSeuils(){return[...document.querySelectorAll('#seuils-card .seuil-row')].map(r=>({min:parseInt(r.querySelector('.smin').value)||0,pts:parseInt(r.querySelector('.spts').value)||1}));}
 function ptsForBid(bid){const s=[...G.cfg.seuils].sort((a,b)=>b.min-a.min);for(const x of s)if(bid>=x.min)return x.pts;return 1;}
 
+function resetHistory(){
+  if(!confirm("Effacer tout l'historique des parties ?")) return;
+  pastGames=[];
+  localStorage.removeItem('belote_games');
+  renderPastGames();
+}
+
 function renderPastGames(){
   const el=document.getElementById('history-section');
   if(!pastGames.length){el.innerHTML='';return;}
   const wins={};
   pastGames.forEach(g=>{wins[g.winner]=(wins[g.winner]||0)+1;});
   const we=Object.entries(wins).sort((a,b)=>b[1]-a[1]);
-  let h=`<div class="sec-label" style="margin-top:28px">Parties précédentes</div>`;
-  h+=`<div class="card"><div class="wins-row">`;
+  let h='<div style="display:flex;align-items:center;justify-content:space-between;margin-top:28px;margin-bottom:8px"><div class="sec-label" style="margin:0">Parties précédentes</div><button onclick="resetHistory()" style="font-size:12px;font-weight:500;color:var(--red-ink);background:var(--red-bg);border:none;border-radius:var(--r-full);padding:4px 12px;cursor:pointer;font-family:inherit">Réinitialiser</button></div>';
+  h+='<div class="card"><div class="wins-row">';
   we.forEach(([name,count],i)=>{h+=`<div class="win-chip"><div class="win-av" style="background:${AV[i%4].bg};color:${AV[i%4].c}">${name[0].toUpperCase()}</div><span class="win-name">${name}</span><span class="win-count">&nbsp;${count}v</span></div>`;});
-  h+=`</div></div><div class="card" style="margin-top:8px">`;
+  h+='</div></div><div class="card" style="margin-top:8px">';
   [...pastGames].reverse().slice(0,8).forEach(g=>{h+=`<div class="hist-entry"><div class="hist-info"><div class="hist-names">${g.players.join(' · ')}</div><div class="hist-date">${g.date} · ${g.manches} manches</div></div><div class="hist-winner">🏆 ${g.winner}</div></div>`;});
-  h+=`</div>`;
+  h+='</div>';
   el.innerHTML=h;
 }
 
